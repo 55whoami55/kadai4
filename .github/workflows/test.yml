@@ -1,0 +1,22 @@
+name: GCD Script CI Test
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. GitHubリポジトリからコードをチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. スクリプトファイルに実行権限を付与
+      - name: Grant execute permissions
+        run: |
+          chmod +x gcd.sh
+          chmod +x test_gcd.sh
+
+      # 3. テストスクリプトの実行
+      - name: Run automated test
+        run: ./test_gcd.sh
